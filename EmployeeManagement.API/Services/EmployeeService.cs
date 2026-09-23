@@ -44,7 +44,7 @@ namespace EmployeeManagement.API.Services
 
             if (currentUser == null)
                 throw new Exception("Current user not found.");
-
+             employee.CreatedBy = currentUser.UserName;
             var targetHierarchyLevel =
                 await _employeeRepository.GetDesignationHierarchyLevel(
                     employee.DesignationId);

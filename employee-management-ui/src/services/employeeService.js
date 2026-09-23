@@ -13,3 +13,20 @@ export const getEmployees = async (search = "") => {
 
     return await response.json();
 };
+
+
+export const deleteEmployee = async (employeeId, deletingEmployeeId) => {
+    const response = await fetch(
+        `https://localhost:7019/api/Employee/${employeeId}?deletingEmployeeId=${deletingEmployeeId}`,
+        {
+            method: "DELETE",
+        }
+    );
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to delete employee");
+    }
+
+    return await response.json();
+};

@@ -6,6 +6,8 @@ import {
     Paper,
     Button,
     CircularProgress,
+    Divider,
+    Grid,
 } from "@mui/material";
 
 const API_URL = "https://localhost:7019/api/Employee";
@@ -44,9 +46,38 @@ function EmployeeDetails() {
         fetchEmployee();
     }, [id]);
 
+    const formatDate = (date) => {
+        if (!date) return "Not provided";
+
+        return new Date(date).toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+        });
+    };
+
+    const displayValue = (value) => {
+        if (
+            value === null ||
+            value === undefined ||
+            value === ""
+        ) {
+            return "Not provided";
+        }
+
+        return value;
+    };
+
     if (loading) {
         return (
-            <Box sx={{ padding: 4, textAlign: "center" }}>
+            <Box
+                sx={{
+                    minHeight: "100vh",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
+            >
                 <CircularProgress />
             </Box>
         );
@@ -71,69 +102,299 @@ function EmployeeDetails() {
     }
 
     return (
-        <Box sx={{ padding: 4 }}>
-            <Button
-                variant="outlined"
-                onClick={() => navigate("/")}
-                sx={{ marginBottom: 3 }}
+        <Box
+            sx={{
+                minHeight: "100vh",
+                backgroundColor: "#f5f7fa",
+                padding: { xs: 2, md: 4 },
+            }}
+        >
+            {/* Header */}
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginBottom: 3,
+                }}
             >
-                ← Back to Employees
-            </Button>
+                <Box>
+                    <Typography
+                        variant="h4"
+                        sx={{
+                            fontWeight: 700,
+                            color: "#1f2937",
+                        }}
+                    >
+                        Employee Details
+                    </Typography>
 
-            <Typography variant="h4" sx={{ marginBottom: 3 }}>
-                Employee Details
-            </Typography>
+                    <Typography
+                        variant="body2"
+                        sx={{
+                            color: "#6b7280",
+                            marginTop: 0.5,
+                        }}
+                    >
+                        Complete employee information
+                    </Typography>
+                </Box>
 
-            <Paper sx={{ padding: 3 }}>
-                <Typography variant="h6" sx={{ marginBottom: 2 }}>
-                    Personal Information
-                </Typography>
+                <Button
+                    variant="outlined"
+                    onClick={() => navigate("/")}
+                >
+                    ← Back to Employees
+                </Button>
+            </Box>
 
-                <Typography>
-                    <strong>Employee ID:</strong> {employee.employeeId}
-                </Typography>
+            {/* Personal Information */}
+            <InfoSection title="Personal Information">
+                <InfoItem
+                    label="Employee ID"
+                    value={employee.employeeId}
+                />
 
-                <Typography>
-                    <strong>Employee Code:</strong> {employee.empCode}
-                </Typography>
+                <InfoItem
+                    label="Employee Code"
+                    value={employee.empCode}
+                />
 
-                <Typography>
-                    <strong>First Name:</strong> {employee.firstName}
-                </Typography>
+                <InfoItem
+                    label="First Name"
+                    value={employee.firstName}
+                />
 
-                <Typography>
-                    <strong>Last Name:</strong> {employee.lastName}
-                </Typography>
+                <InfoItem
+                    label="Last Name"
+                    value={employee.lastName}
+                />
 
-                <Typography>
-                    <strong>Email:</strong> {employee.email}
-                </Typography>
+                <InfoItem
+                    label="Email"
+                    value={employee.email}
+                />
 
-                <Typography>
-                    <strong>Phone:</strong> {employee.phoneNumber}
-                </Typography>
+                <InfoItem
+                    label="Phone Number"
+                    value={employee.phoneNumber}
+                />
 
-                <Typography sx={{ marginTop: 3 }}>
-                    <strong>Designation:</strong>{" "}
-                    {employee.designationName}
-                </Typography>
+                <InfoItem
+                    label="Date of Birth"
+                    value={formatDate(employee.dateOfBirth)}
+                />
+            </InfoSection>
 
-                <Typography>
-                    <strong>Department:</strong>{" "}
-                    {employee.department}
-                </Typography>
+            {/* Professional Information */}
+            <InfoSection title="Professional Information">
+                <InfoItem
+                    label="Designation"
+                    value={employee.designationName}
+                />
 
-                <Typography>
-                    <strong>Reporting Manager:</strong>{" "}
-                    {employee.reportingManager}
-                </Typography>
+                <InfoItem
+                    label="Hierarchy Level"
+                    value={employee.hierarchyLevel}
+                />
 
-                <Typography>
-                    <strong>Status:</strong> {employee.status}
-                </Typography>
-            </Paper>
+                <InfoItem
+                    label="Department"
+                    value={employee.department}
+                />
+
+                <InfoItem
+                    label="Reporting Manager"
+                    value={employee.reportingManager}
+                />
+
+                <InfoItem
+                    label="Reporting Manager ID"
+                    value={employee.reportingManagerId}
+                />
+
+                <InfoItem
+                    label="Date of Joining"
+                    value={formatDate(employee.dateOfJoining)}
+                />
+
+                <InfoItem
+                    label="Employment Type"
+                    value={employee.employmentType}
+                />
+
+                <InfoItem
+                    label="Work Location"
+                    value={employee.workLocation}
+                />
+
+                <InfoItem
+                    label="Status"
+                    value={employee.status}
+                />
+            </InfoSection>
+
+            {/* Compensation */}
+            <InfoSection title="Compensation">
+                <InfoItem
+                    label="Salary"
+                    value={
+                        employee.salary !== null &&
+                        employee.salary !== undefined
+                            ? `₹${employee.salary}`
+                            : "Not provided"
+                    }
+                />
+            </InfoSection>
+
+            {/* Address */}
+            <InfoSection title="Address Information">
+                <InfoItem
+                    label="Address"
+                    value={employee.address}
+                />
+
+                <InfoItem
+                    label="City"
+                    value={employee.city}
+                />
+
+                <InfoItem
+                    label="State"
+                    value={employee.state}
+                />
+
+                <InfoItem
+                    label="Country"
+                    value={employee.country}
+                />
+
+                <InfoItem
+                    label="Postal Code"
+                    value={employee.postalCode}
+                />
+            </InfoSection>
+
+            {/* Emergency Contact */}
+            <InfoSection title="Emergency Contact">
+                <InfoItem
+                    label="Contact Name"
+                    value={employee.emergencyContactName}
+                />
+
+                <InfoItem
+                    label="Contact Number"
+                    value={employee.emergencyContactNumber}
+                />
+            </InfoSection>
+
+            {/* Record Information */}
+            <InfoSection title="Record Information">
+                <InfoItem
+                    label="Created Date"
+                    value={formatDate(employee.createdDate)}
+                />
+
+                <InfoItem
+                    label="Created By"
+                    value={employee.createdBy}
+                />
+
+                <InfoItem
+                    label="Updated Date"
+                    value={formatDate(employee.updatedDate)}
+                />
+
+                <InfoItem
+                    label="Updated By"
+                    value={employee.updatedBy}
+                />
+            </InfoSection>
         </Box>
     );
+}
+
+/* ------------------------------------------------ */
+/* Reusable Section Component                       */
+/* ------------------------------------------------ */
+
+function InfoSection({ title, children }) {
+    return (
+        <Paper
+            elevation={0}
+            sx={{
+                padding: 3,
+                marginBottom: 3,
+                borderRadius: 2,
+                border: "1px solid #e5e7eb",
+                backgroundColor: "#ffffff",
+            }}
+        >
+            <Typography
+                variant="h6"
+                sx={{
+                    fontWeight: 600,
+                    color: "#111827",
+                    marginBottom: 2,
+                }}
+            >
+                {title}
+            </Typography>
+
+            <Divider sx={{ marginBottom: 3 }} />
+
+            <Grid container spacing={3}>
+                {children}
+            </Grid>
+        </Paper>
+    );
+}
+
+/* ------------------------------------------------ */
+/* Reusable Information Item                       */
+/* ------------------------------------------------ */
+
+function InfoItem({ label, value }) {
+    return (
+        <Grid item xs={12} sm={6} md={4}>
+            <Box>
+                <Typography
+                    variant="caption"
+                    sx={{
+                        display: "block",
+                        color: "#6b7280",
+                        fontWeight: 600,
+                        marginBottom: 0.5,
+                    }}
+                >
+                    {label}
+                </Typography>
+
+                <Typography
+                    variant="body2"
+                    sx={{
+                        color: "#111827",
+                        fontWeight: 500,
+                        wordBreak: "break-word",
+                    }}
+                >
+                    {displayValue(value)}
+                </Typography>
+            </Box>
+        </Grid>
+    );
+}
+
+function displayValue(value) {
+    if (
+        value === null ||
+        value === undefined ||
+        value === ""
+    ) {
+        return "Not provided";
+    }
+
+    return value;
 }
 
 export default EmployeeDetails;

@@ -15,27 +15,16 @@ builder.Services.AddCors(options =>
     });
 });
 
-
-
 builder.Services.AddControllers();
-
-
-
-
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 builder.Services.AddScoped<EmployeeRepository>();
 builder.Services.AddScoped<EmployeeService>();
 builder.Services.AddScoped<PermissionService>();
 builder.Services.AddScoped<UserRepository>();
 
-
 var app = builder.Build();
-
 app.UseMiddleware<ExceptionMiddleware>();
-
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -43,13 +32,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseRouting();
-
 app.UseCors("FrontendPolicy");
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

@@ -1,4 +1,5 @@
-﻿using EmployeeManagement.API.Models;
+﻿using EmployeeManagement.API.DTOs;
+using EmployeeManagement.API.Models;
 using Microsoft.Data.SqlClient;
 using System.Data;
 
@@ -67,5 +68,52 @@ namespace EmployeeManagement.API.Repositories
 
             return null;
         }
+        //public async Task<UserDto> CreateUser(CreateUserDto user)
+        //{
+        //    var connectionString =
+        //        _configuration.GetConnectionString("DefaultConnection");
+
+        //    using SqlConnection connection =
+        //        new SqlConnection(connectionString);
+
+        //    using SqlCommand command =
+        //        new SqlCommand("sp_CreateUser", connection);
+
+        //    command.CommandType = CommandType.StoredProcedure;
+
+        //    command.Parameters.AddWithValue(
+        //        "@EmployeeId",
+        //        user.EmployeeId);
+
+        //    command.Parameters.AddWithValue(
+        //        "@UserName",
+        //        user.UserName);
+
+        //    command.Parameters.AddWithValue(
+        //        "@RoleId",
+        //        user.RoleId);
+
+        //    await connection.OpenAsync();
+
+        //    using SqlDataReader reader =
+        //        await command.ExecuteReaderAsync();
+
+        //    if (await reader.ReadAsync())
+        //    {
+        //        return new UserDto
+        //        {
+        //            UserId = Convert.ToInt32(reader["UserId"]),
+        //            EmployeeId = Convert.ToInt32(reader["EmployeeId"]),
+        //            UserName = reader["UserName"]?.ToString() ?? "",
+        //            RoleId = Convert.ToInt32(reader["RoleId"]),
+        //            RoleName = reader["RoleName"]?.ToString() ?? "",
+        //            Status = reader["Status"]?.ToString() ?? "",
+        //            CreatedDate = Convert.ToDateTime(reader["CreatedDate"])
+        //        };
+        //    }
+
+        //    throw new Exception("User could not be created.");
+        //}
+
     }
 }

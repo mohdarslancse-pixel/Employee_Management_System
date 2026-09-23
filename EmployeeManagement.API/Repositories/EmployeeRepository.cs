@@ -174,11 +174,41 @@ namespace EmployeeManagement.API.Repositories
                     PostalCode =
                         reader["PostalCode"]?.ToString(),
 
+
                     EmergencyContactName =
-                        reader["EmergencyContactName"]?.ToString(),
+    reader["EmergencyContactName"]?.ToString(),
 
                     EmergencyContactNumber =
-                        reader["EmergencyContactNumber"]?.ToString()
+    reader["EmergencyContactNumber"]?.ToString(),
+
+                    IsDeleted =
+    Convert.ToBoolean(reader["IsDeleted"]),
+
+                    CreatedDate =
+    Convert.ToDateTime(reader["CreatedDate"]),
+
+                    CreatedBy =
+    reader["CreatedBy"]?.ToString() ?? "",
+
+                    UpdatedDate =
+    reader["UpdatedDate"] == DBNull.Value
+        ? null
+        : Convert.ToDateTime(reader["UpdatedDate"]),
+
+                    UpdatedBy =
+    reader["UpdatedBy"] == DBNull.Value
+        ? null
+        : reader["UpdatedBy"]?.ToString(),
+
+                    DeletedDate =
+    reader["DeletedDate"] == DBNull.Value
+        ? null
+        : Convert.ToDateTime(reader["DeletedDate"]),
+
+                    DeletedBy =
+    reader["DeletedBy"] == DBNull.Value
+        ? null
+        : reader["DeletedBy"]?.ToString()
                 };
             }
 
@@ -278,7 +308,7 @@ namespace EmployeeManagement.API.Repositories
 
             command.Parameters.AddWithValue(
                 "@CreatedBy",
-                (object?)employee.CreatedBy ?? "System");
+                employee.CreatedBy ?? "System");
 
             await connection.OpenAsync();
 
