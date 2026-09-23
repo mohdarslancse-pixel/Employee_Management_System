@@ -1384,16 +1384,7 @@ For production deployment, additional security features should be implemented:
 - JWT authentication
 - Proper authorization
 - Password hashing
-- Secure secret management
-- HTTPS
-- Input validation
-- Secure CORS configuration
-- Logging
-- Monitoring
-- Rate limiting where required
-- Database security
-- Environment-specific configuration
-- Protection of connection strings and credentials
+
 
 ---
 
@@ -1536,9 +1527,6 @@ This project demonstrates practical knowledge of:
 | Authentication | Planned |
 | Restore Deleted Employee | Planned |
 | Role-Based Frontend Permissions | Planned |
-| Cloud Database | Planned |
-| Production Deployment | Planned |
-| Automated Testing | Planned |
 
 ---
 
@@ -1559,91 +1547,3 @@ Database:
 Local SQL Server
 ```
 
-The application can later be deployed using cloud hosting for the frontend, backend, and database.
-
----
-
-# GitHub Setup
-
-Clone the repository:
-
-```bash
-git clone <repository-url>
-```
-
-Navigate to the project:
-
-```bash
-cd EmployeeManagement
-```
-
-Install frontend dependencies:
-
-```bash
-cd employee-management-ui
-npm install
-```
-
-Then start the backend and frontend separately.
-
----
-
-# Contribution
-
-For future development:
-
-1. Create a new branch:
-
-```bash
-git checkout -b feature/feature-name
-```
-
-2. Make the required changes.
-
-3. Test the application.
-
-4. Commit the changes:
-
-```bash
-git add .
-git commit -m "Add feature description"
-```
-
-5. Push the branch:
-
-```bash
-git push origin feature/feature-name
-```
-
-6. Create a Pull Request on GitHub.
-
----
-
-# License
-
-This project is currently intended for learning, development, and demonstration purposes.
-
----
-
-# Author
-
-**Mohd Arslan**
-
-M.Tech — Information Technology
-
-IIIT Allahabad
-
----
-
-# Acknowledgements
-
-This project was developed as a practical full-stack application to understand and implement:
-
-- Frontend development
-- Backend API development
-- Database design
-- Stored Procedures
-- REST API architecture
-- Permission management
-- CRUD operations
-- Full-stack application integration
